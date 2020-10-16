@@ -1,4 +1,4 @@
-// 将xlsx转化成csv
+// 将xlsx转换成csv
 package main
 
 import (
@@ -15,19 +15,18 @@ func main() {
 		return
 	}
 
-	xlsxPath := flag.Args()[0] // xlsx文件路径
-	csvPath := flag.Args()[1]  // csv文件路径
-	fmt.Println(xlsxPath, "->", csvPath)
+	excelPath := flag.Args()[0] // xlsx文件路径
+	csvPath := flag.Args()[1]   // csv文件路径
+	fmt.Println(excelPath, "->", csvPath)
 
-	t1 := time.Now().Unix()
-	ExcelToCsv(xlsxPath, csvPath)
-	t2 := time.Now().Unix()
-	fmt.Println("耗时", (t2 - t1))
-
-	fmt.Println(time.Now().Unix())
+	// 运行
+	t1 := time.Now().UnixNano() / 1e3
+	ExcelToCsv(excelPath, csvPath)
+	t2 := time.Now().Unix() / 1e3
+	fmt.Println("耗时：", t2-t1)
 }
 
 // 打印帮助信息
 func PrintUsage() {
-	fmt.Println("excelToCsv.exe [XLSX_PATH] [CSV_PATH]")
+	fmt.Println("excelToCsv.exe [EXCEL_PATH] [CSV_PATH]")
 }

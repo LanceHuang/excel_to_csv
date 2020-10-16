@@ -9,8 +9,6 @@ import (
 )
 
 // 将xlsx转换成csv
-// @param xlsxPath xlsx文件路径
-// @param csvPath csv文件路径
 func ExcelToCsv(xlsxPath string, csvPath string) {
 	// 读xlsx文件
 	xlsxFile, err := excelize.OpenFile(xlsxPath)
@@ -22,12 +20,6 @@ func ExcelToCsv(xlsxPath string, csvPath string) {
 	// 读取第一张sheet
 	firstSheetName := xlsxFile.GetSheetName(1)
 	rows := xlsxFile.GetRows(firstSheetName)
-	// for _, row := range rows {
-	// 	for _, colCell := range row {
-	// 		fmt.Print(colCell, "\t")
-	// 	}
-	// 	fmt.Println()
-	// }
 
 	// 创建csv文件
 	csvFile, err := os.Create(csvPath)
