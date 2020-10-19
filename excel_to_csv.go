@@ -2,19 +2,17 @@ package main
 
 import (
 	"encoding/csv"
-	"fmt"
 	"os"
 
 	"github.com/360EntSecGroup-Skylar/excelize"
 )
 
 // 将xlsx转换成csv
-func ExcelToCsv(xlsxPath string, csvPath string) {
+func ExcelToCsv(xlsxPath string, csvPath string) error {
 	// 读xlsx文件
 	xlsxFile, err := excelize.OpenFile(xlsxPath)
 	if err != nil {
-		fmt.Println(err)
-		return
+		return err
 	}
 
 	// 读取第一张sheet
@@ -24,8 +22,7 @@ func ExcelToCsv(xlsxPath string, csvPath string) {
 	// 创建csv文件
 	csvFile, err := os.Create(csvPath)
 	if err != nil {
-		fmt.Println(err)
-		return
+		return err
 	}
 
 	defer csvFile.Close()
@@ -33,4 +30,5 @@ func ExcelToCsv(xlsxPath string, csvPath string) {
 	csvWriter := csv.NewWriter(csvFile) //创建一个新的写入文件流
 	csvWriter.WriteAll(rows)
 	csvWriter.Flush()
+	return nil
 }

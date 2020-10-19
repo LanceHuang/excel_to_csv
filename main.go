@@ -17,13 +17,16 @@ func main() {
 
 	excelPath := flag.Args()[0] // xlsx文件路径
 	csvPath := flag.Args()[1]   // csv文件路径
-	fmt.Println(excelPath, "->", csvPath)
 
 	// 运行
-	t1 := time.Now().UnixNano() / 1e3
-	ExcelToCsv(excelPath, csvPath)
-	t2 := time.Now().Unix() / 1e3
-	fmt.Println("耗时：", t2-t1)
+	t1 := time.Now().UnixNano()
+	err := ExcelToCsv(excelPath, csvPath)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	t2 := time.Now().UnixNano()
+	fmt.Println(excelPath, "->", csvPath, (t2-t1)/1e6, "ms")
 }
 
 // 打印帮助信息
